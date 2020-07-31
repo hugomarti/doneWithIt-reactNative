@@ -1,10 +1,9 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-
-import ViewImageScreen from "./app/screens/ViewImageScreen";
+import React, { useState } from "react";
+import { StyleSheet, Text, View, TextInput } from "react-native";
+import LoginScreen from "./app/screens/LoginScreen";
 
 export default function App() {
-  return <ViewImageScreen />;
+  return <LoginScreen />;
 }
 
 const styles = StyleSheet.create({});
