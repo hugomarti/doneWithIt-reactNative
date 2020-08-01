@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, TextInput, Platform } from "react-native";
+import { View, TextInput, StyleSheet } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import defaultStyles from "../config/styles";
@@ -31,7 +31,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     padding: 15,
     marginVertical: 10,
-    alignItems: "center",
   },
   icon: {
     marginRight: 10,

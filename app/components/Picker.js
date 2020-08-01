@@ -9,15 +9,15 @@ import {
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
+import Text from "./Text";
 import defaultStyles from "../config/styles";
-import AppText from "./AppText";
-import Screen from "./Screen";
 import PickerItem from "./PickerItem";
+import Screen from "./Screen";
 
 function AppPicker({
   icon,
   items,
-  numColumns = 1,
+  numberOfColumns = 1,
   onSelectItem,
   PickerItemComponent = PickerItem,
   placeholder,
@@ -25,8 +25,9 @@ function AppPicker({
   width = "100%",
 }) {
   const [modalVisible, setModalVisible] = useState(false);
+
   return (
-    <React.Fragment>
+    <>
       <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
         <View style={[styles.container, { width }]}>
           {icon && (
@@ -38,10 +39,11 @@ function AppPicker({
             />
           )}
           {selectedItem ? (
-            <AppText style={styles.text}>{selectedItem.label}</AppText>
+            <Text style={styles.text}>{selectedItem.label}</Text>
           ) : (
-            <AppText style={styles.placeholder}>{placeholder}</AppText>
+            <Text style={styles.placeholder}>{placeholder}</Text>
           )}
+
           <MaterialCommunityIcons
             name="chevron-down"
             size={20}
@@ -52,26 +54,24 @@ function AppPicker({
       <Modal visible={modalVisible} animationType="slide">
         <Screen>
           <Button title="Close" onPress={() => setModalVisible(false)} />
-          <View>
-            <FlatList
-              data={items}
-              keyExtractor={(item) => item.value.toString()}
-              numColumns={numColumns}
-              renderItem={({ item }) => (
-                <PickerItemComponent
-                  item={item}
-                  label={item.label}
-                  onPress={() => {
-                    setModalVisible(false);
-                    onSelectItem(item);
-                  }}
-                />
-              )}
-            />
-          </View>
+          <FlatList
+            data={items}
+            keyExtractor={(item) => item.value.toString()}
+            numColumns={numberOfColumns}
+            renderItem={({ item }) => (
+              <PickerItemComponent
+                item={item}
+                label={item.label}
+                onPress={() => {
+                  setModalVisible(false);
+                  onSelectItem(item);
+                }}
+              />
+            )}
+          />
         </Screen>
       </Modal>
-    </React.Fragment>
+    </>
   );
 }
 
@@ -82,19 +82,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     padding: 15,
     marginVertical: 10,
-    alignItems: "center",
-  },
-  iconsContainer: {
-    flexDirection: "column-reverse",
   },
   icon: {
     marginRight: 10,
   },
-  text: {
-    flex: 1,
-  },
   placeholder: {
     color: defaultStyles.colors.medium,
+    flex: 1,
+  },
+  text: {
     flex: 1,
   },
 });
